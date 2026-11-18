@@ -9,9 +9,9 @@ python3 airbnb_price.py
 ```
 
 ## What it does
-- Makes 500 fake Airbnb listings (no real dataset)
+- Makes 600 fake Airbnb listings (no real dataset)
 - Trains a linear regression model with gradient descent
-- Predicts the price of a listing you describe
+- Asks you to pick bedrooms, bathrooms, guests and city size, then asks yes/no for amenities (pool, wifi, AC, kitchen, parking, TV, washing machine, heater)
 - Shows which features affect price the most
 
 ## Limitations
