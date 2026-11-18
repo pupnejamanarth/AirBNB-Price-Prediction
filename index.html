@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Airbnb Price Predictor</title>
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 24px auto; padding: 0 16px; background: #fff5f5; color: #222; }
+    h1 { color: #ff385c; }
+    .card { background: white; padding: 16px; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    select, input[type=number] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    .chk { display: inline-block; width: 48%; font-weight: normal; }
+    button { background: #ff385c; color: white; border: 0; padding: 12px 20px; border-radius: 8px; font-size: 16px; margin-top: 16px; cursor: pointer; }
+    button:disabled { background: #bbb; }
+    #result { font-size: 22px; font-weight: bold; margin-top: 14px; color: #ff385c; }
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 4px; border-bottom: 1px solid #eee; }
+    small { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Airbnb Price Predictor</h1>
+  <p id="status">Loading Python and training the model... (takes ~10-20 seconds)</p>
+
+  <div class="card">
+    <h3>Describe your listing</h3>
+    <label>Bedrooms
+      <select id="bedrooms"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+    <label>Bathrooms
+      <select id="bathrooms"><option>1</option><option>2</option><option>3</option></select></label>
+    <label>Max guests
+      <select id="guests"><option>2</option><option>4</option><option selected>6</option><option>8</option><option>10</option><option>12</option></select></label>
+    <label>Place type
+      <select id="city"><option value="1">Small town</option><option value="2">Medium city</option><option value="3">Big city</option></select></label>
+    <label>Distance from city center (km, 0-20)
+      <input type="number" id="distance" value="5" min="0" max="20" step="0.5"></label>
+    <label>Guest rating (3.0-5.0)
+      <input type="number" id="rating" value="4.5" min="3" max="5" step="0.1"></label>
+    <label>Amenities</label>
+    <div>
+      <label class="chk"><input type="checkbox" id="pool"> pool</label>
+      <label class="chk"><input type="checkbox" id="wifi"> wifi</label>
+      <label class="chk"><input type="checkbox" id="air_conditioning"> air conditioning</label>
+      <label class="chk"><input type="checkbox" id="kitchen"> kitchen</label>
+      <label class="chk"><input type="checkbox" id="parking"> parking</label>
+      <label class="chk"><input type="checkbox" id="tv"> tv</label>
+      <label class="chk"><input type="checkbox" id="washing_machine"> washing machine</label>
+      <label class="chk"><input type="checkbox" id="heater"> heater</label>
+    </div>
+    <button id="predict-btn" py-click="predict_price" disabled>Predict price</button>
+    <div id="result"></div>
+  </div>
+
+  <div class="card">
+    <h3>What affects price the most?</h3>
+    <table id="importance"></table>
+  </div>
+
+  <small>School project. Trained on fake data, so prices are just for demo.</small>
+
+  <script type="py" src="./app.py" config='{"files": {"./airbnb_price.py": "./airbnb_price.py"}}'></script>
+</body>
+</html>
